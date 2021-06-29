@@ -6,7 +6,7 @@
 #include <fstream>
 #include "ImageList.h"
 
-static const std::vector<std::string> SUPPORTED_EXTENSIONS{".jpg", ".jpeg", ".png", ".gif"};
+const std::vector<std::string> ImageList::SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif"};
 
 
 ImageList::ImageList(const std::vector<std::string> &filePaths) {
@@ -33,9 +33,10 @@ int ImageList::getImagesNumber() {
 
 
 void ImageList::addImage(const std::string &imagePath) {
-    if (isValidImagePath(imagePath))
+    if (isValidImagePath(imagePath)) {
         imagesPath.push_back(imagePath);
-    else
+        notify();
+    } else
         throw std::invalid_argument("Invalid image path.");
 }
 
@@ -46,9 +47,15 @@ bool ImageList::isValidImagePath(const std::string &path) {
     if (path.empty() || !file.good()) return false;
 
     // Check if the file has a supported extension
-    for (const auto &extension: SUPPORTED_EXTENSIONS)
+    for (const auto &extension: ImageList::SUPPORTED_EXTENSIONS)
         if (endsWith(path, extension))
             return true;
 
     return false;
+}
+
+void ImageList::notify() {
+    for (auto observer: observers)
+        observer->update();
+
 }

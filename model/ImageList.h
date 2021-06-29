@@ -16,6 +16,11 @@ class ImageList : public Subject {
 public:
 
     /**
+     * Default constructor
+     */
+    ImageList() = default;
+
+    /**
      * Parametrized constructor
      * @param filePaths vector containing the image paths
      */
@@ -56,6 +61,11 @@ public:
      * @return (bool) True if the image path is valid, false otherwise
      */
     static bool isValidImagePath(const std::string &path);
+
+    /**
+     * Notify all Observers
+     */
+    void notify() override;
 
 private:
     std::vector<std::string> imagesPath;

@@ -18,17 +18,13 @@ public:
         observers.push_back(o);
     }
 
-    virtual void notify() {
-        for (auto observer: observers)
-            observer->update();
-    };
+    virtual void notify() = 0;
 
-    virtual ~Subject() = 0;
+    virtual ~Subject() = default;
 
 protected:
     std::list<Observer *> observers;
 };
 
-Subject::~Subject() = default;
 
 #endif //QT_SLIDESHOW_SUBJECT_H
