@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_PREFIX_PATH D:\\QT\\5.15.2\\mingw81_64)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
@@ -18,9 +18,11 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
-        MainWindow.cpp
-        MainWindow.h
-        MainWindow.ui
+        MainWindow.cpp MainWindow.h MainWindow.ui
+        components/ChooseFilesDialog.h components/ChooseFilesDialog.cpp components/ChooseFilesDialog.ui
+        controller/SlideshowController.cpp controller/SlideshowController.h
+        model/ImageList.cpp model/ImageList.h
+        interfaces/Subject.h interfaces/Observer.h
         )
 
 
