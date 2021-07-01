@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
 #include <interfaces/Observer.h>
 #include <controller/SlideshowController.h>
 #include <model/ImageList.h>
@@ -43,10 +44,13 @@ private:
      */
     void updateProgressBar();
 
+    void startSlideshowTimer();
+
     Ui::MainWindow *ui;
     SlideshowController *controller;
     ImageList *imageList;
     QDialog *filesDialog;
+    QTimer *timer;
 };
 
 #endif // MAINWINDOW_H

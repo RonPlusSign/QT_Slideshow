@@ -25,6 +25,8 @@ MainWindow::MainWindow(SlideshowController *controller, ImageList *imageList, QD
     if (this->imageList->getImagesNumber() > 0) {
         renderImage();
     }
+
+    startSlideshowTimer();
 }
 
 MainWindow::~MainWindow() {
@@ -37,11 +39,17 @@ void MainWindow::on_play_clicked() {
 }
 
 void MainWindow::on_next_clicked() {
+    delete timer;
+
     controller->nextImage();
+    startSlideshowTimer();
 }
 
 void MainWindow::on_previous_clicked() {
+    delete timer;
+
     controller->previousImage();
+    startSlideshowTimer();
 }
 
 void MainWindow::update() {
@@ -58,3 +66,8 @@ void MainWindow::updateProgressBar() {
     ui->progressBar->setValue(imageList->getDisplayedImagePosition() + 1);
 }
 
+void MainWindow::startSlideshowTimer() {
+    timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &MainWindow::on_next_clicked);
+    timer->start(3000);
+}
