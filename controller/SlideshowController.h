@@ -17,6 +17,8 @@ public:
     void pause();
     void play();
 
+    void addImage(const std::string& imagePath);
+    void clearImageList();
 private:
     ImageList *imageList;
 };

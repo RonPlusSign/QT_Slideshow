@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include <model/ImageList.h>
+#include <controller/SlideshowController.h>
+#include <MainWindow.h>
 
 namespace Ui {
     class ChooseFilesDialog;
@@ -12,7 +14,7 @@ class ChooseFilesDialog : public QDialog {
 Q_OBJECT
 
 public:
-    explicit ChooseFilesDialog(ImageList *imageList, QWidget *parent = nullptr);
+    explicit ChooseFilesDialog(ImageList *imageList, SlideshowController *controller, QWidget *parent = nullptr);
     ~ChooseFilesDialog() override;
 
 private slots:
@@ -24,6 +26,8 @@ private:
 
     Ui::ChooseFilesDialog *ui;
     ImageList *imageList;
+    SlideshowController *controller;
+    MainWindow *mainWindow;
 };
 
 #endif // CHOOSEFILESDIALOG_H

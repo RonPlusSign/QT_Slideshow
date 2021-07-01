@@ -3,16 +3,21 @@
 #include <QFileDialog>
 
 
-ChooseFilesDialog::ChooseFilesDialog(QWidget *parent) : QDialog(parent), ui(new Ui::ChooseFilesDialog), imageList(nullptr) {
+ChooseFilesDialog::ChooseFilesDialog(QWidget *parent) : QDialog(parent), ui(new Ui::ChooseFilesDialog) {
     ui->setupUi(this);
-
     setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::CustomizeWindowHint);
+    setWindowTitle("Choose images");
+
+    ui->confirmBtn->setEnabled(false);
 }
 
-ChooseFilesDialog::ChooseFilesDialog(ImageList *imageList, QWidget *parent) : ChooseFilesDialog(parent) {
+ChooseFilesDialog::ChooseFilesDialog(ImageList *imageList, SlideshowController *controller, QWidget *parent) : ChooseFilesDialog(parent) {
     if (imageList == nullptr)
         throw std::invalid_argument("Invalid ImageList pointer received (ChooseFilesDialog)");
     this->imageList = imageList;
+    mainWindow = nullptr;
+
+    this->controller = controller;
 }
 
 ChooseFilesDialog::~ChooseFilesDialog() {
@@ -24,16 +29,29 @@ void ChooseFilesDialog::on_chooseFilesBtn_clicked() {
 
     QStringList fileNames = QFileDialog::getOpenFileNames(this, "Choose images", QDir::homePath(), fileFilter);
 
+    QString filesList = "";
     for (const auto &file: fileNames)
-        imageList->addImage(file.toStdString());
+        filesList.append(file + "\n");
 
-    // TODO: Enable OK Button
+    if (!fileNames.empty()) {
+        controller->clearImageList();
 
-    // TODO: Send the result to the mainWindow
+        for (const auto &file: fileNames)
+            controller->addImage(file.toStdString());
+
+        ui->confirmBtn->setEnabled(true);
+        ui->filesList->setText(filesList);
+    }
 }
 
 
 void ChooseFilesDialog::on_confirmBtn_clicked() {
-    // TODO: Check if files are valid
+    if (mainWindow == nullptr)
+        mainWindow = new MainWindow(controller, imageList, this);
+
+    mainWindow->show();
+    this->setVisible(false);
+
+    controller->play();
 }
 

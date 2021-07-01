@@ -4,6 +4,7 @@
 
 #include <stdexcept>
 #include <fstream>
+#include <iostream>
 #include "ImageList.h"
 
 const std::vector<std::string> ImageList::SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif"};
@@ -57,5 +58,21 @@ bool ImageList::isValidImagePath(const std::string &path) {
 void ImageList::notify() {
     for (auto observer: observers)
         observer->update();
+}
 
+void ImageList::clear() {
+    imagesPath.clear();
+    notify();
+}
+
+int ImageList::getDisplayedImagePosition() const {
+    return displayedImagePosition;
+}
+
+void ImageList::setDisplayedImagePosition(int displayedImagePosition) {
+    if (displayedImagePosition < 0 || displayedImagePosition >= imagesPath.size())
+        throw std::invalid_argument("Invalid displayed image position");
+
+    this->displayedImagePosition = displayedImagePosition;
+    notify();
 }

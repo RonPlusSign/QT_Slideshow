@@ -67,8 +67,26 @@ public:
      */
     void notify() override;
 
+    /**
+     * Removes all the images inside the list
+     */
+    void clear();
+
+    /**
+     * Get the currently displayed image position
+     * @return (string) The currently displayed image position
+     */
+    int getDisplayedImagePosition() const;
+
+    /**
+     * Sets the currently displayed image position
+     * @param displayedImagePosition (int) Image position
+     */
+    void setDisplayedImagePosition(int displayedImagePosition);
+
 private:
     std::vector<std::string> imagesPath;
+    int displayedImagePosition{0};
 
     static const std::vector<std::string> SUPPORTED_EXTENSIONS;
 

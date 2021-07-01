@@ -14,7 +14,7 @@ class MainWindow : public QMainWindow, public Observer {
 Q_OBJECT
 
 public:
-    MainWindow(SlideshowController *controller, ImageList *imageList, QWidget *parent = nullptr);
+    MainWindow(SlideshowController *controller, ImageList *imageList, QDialog *filesDialog, QWidget *parent = nullptr);
     ~MainWindow() override;
 
     void update() override;
@@ -27,11 +27,26 @@ private slots:
     void on_previous_clicked();
 
 private:
+    /**
+     * Default QT Constructor
+     * @param parent of the current Widget
+     */
     explicit MainWindow(QWidget *parent);
+
+    /**
+     * Load & display the currently selected image
+     */
+    void renderImage();
+
+    /**
+     * Update the progress bar to display the correct level
+     */
+    void updateProgressBar();
 
     Ui::MainWindow *ui;
     SlideshowController *controller;
     ImageList *imageList;
+    QDialog *filesDialog;
 };
 
 #endif // MAINWINDOW_H
