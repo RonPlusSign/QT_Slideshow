@@ -31,7 +31,8 @@ add_executable(QT_Slideshow main.cpp)
 add_library(core ${PROJECT_SOURCES})
 target_link_libraries(core Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(QT_Slideshow core)
-# target_link_libraries(QT_Slideshow PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+
+add_subdirectory(tests)
 
 set_target_properties(QT_Slideshow PROPERTIES
         MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
