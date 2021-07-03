@@ -51,7 +51,5 @@ void ChooseFilesDialog::on_confirmBtn_clicked() {
 
     mainWindow->show();
     this->setVisible(false);
-
-    controller->play();
 }
 
