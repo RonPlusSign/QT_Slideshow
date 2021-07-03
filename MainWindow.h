@@ -21,11 +21,12 @@ public:
     void update() override;
 
 private slots:
-    void on_play_clicked();
 
     void on_next_clicked();
 
     void on_previous_clicked();
+
+    void on_togglePlayPause_clicked();
 
 private:
     /**
@@ -44,13 +45,23 @@ private:
      */
     void updateProgressBar();
 
+    /**
+     * Start a new QTimer to scroll images
+     */
     void startSlideshowTimer();
+
+    /**
+     * Override the QMainWindow showEvent attribute in order to display the first image properly
+     * @param event QShowEvent triggered when show() is called
+     */
+    void showEvent(QShowEvent *event) override;
 
     Ui::MainWindow *ui;
     SlideshowController *controller;
     ImageList *imageList;
     QDialog *filesDialog;
     QTimer *timer;
+    bool isRunning;
 };
 
 #endif // MAINWINDOW_H

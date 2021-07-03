@@ -4,7 +4,14 @@
 #include "MainWindow.h"
 #include "./ui_MainWindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow), imageList(nullptr), controller(nullptr), filesDialog(nullptr) {
+MainWindow::MainWindow(QWidget *parent)
+        : QMainWindow(parent),
+          ui(new Ui::MainWindow),
+          imageList(nullptr),
+          controller(nullptr),
+          filesDialog(nullptr),
+          timer(nullptr),
+          isRunning(true) {
     ui->setupUi(this);
     setWindowTitle("Image Slideshow");
 }
@@ -18,13 +25,7 @@ MainWindow::MainWindow(SlideshowController *controller, ImageList *imageList, QD
 
     // Set up the progress bar
     ui->progressBar->setRange(0, imageList->getImagesNumber());
-    ui->progressBar->setFormat("%v/%m");
     updateProgressBar();
-
-    // Load image
-    if (this->imageList->getImagesNumber() > 0) {
-        renderImage();
-    }
 
     startSlideshowTimer();
 }
@@ -34,22 +35,30 @@ MainWindow::~MainWindow() {
     this->imageList->unsubscribe(this);
 }
 
-void MainWindow::on_play_clicked() {
-
+void MainWindow::on_togglePlayPause_clicked() {
+    if (isRunning) {
+        ui->togglePlayPause->setText("►");
+        delete timer;
+        timer = nullptr;
+    } else {
+        ui->togglePlayPause->setText("❚❚");
+        startSlideshowTimer();
+    }
+    isRunning = !isRunning;
 }
 
 void MainWindow::on_next_clicked() {
-    delete timer;
-
     controller->nextImage();
-    startSlideshowTimer();
+
+    if (isRunning)
+        startSlideshowTimer();
 }
 
 void MainWindow::on_previous_clicked() {
-    delete timer;
-
     controller->previousImage();
-    startSlideshowTimer();
+
+    if (isRunning)
+        startSlideshowTimer();
 }
 
 void MainWindow::update() {
@@ -59,7 +68,7 @@ void MainWindow::update() {
 
 void MainWindow::renderImage() {
     QPixmap img(QString::fromStdString(this->imageList->getImagePath(this->imageList->getDisplayedImagePosition())));
-    ui->image->setPixmap(img.scaled(img.size(), Qt::KeepAspectRatio));
+    ui->image->setPixmap(img.scaled(ui->image->size(), Qt::KeepAspectRatio));
 }
 
 void MainWindow::updateProgressBar() {
@@ -67,7 +76,18 @@ void MainWindow::updateProgressBar() {
 }
 
 void MainWindow::startSlideshowTimer() {
+    if (timer != nullptr) {
+        delete timer;
+        timer = nullptr;
+    }
+
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::on_next_clicked);
     timer->start(3000);
+    timer->setSingleShot(true);
+}
+
+void MainWindow::showEvent(QShowEvent *event) {
+    QWidget::showEvent(event);
+    renderImage();
 }

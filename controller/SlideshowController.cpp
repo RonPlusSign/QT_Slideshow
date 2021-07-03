@@ -22,13 +22,6 @@ void SlideshowController::previousImage() {
         imageList->setDisplayedImagePosition(imageList->getDisplayedImagePosition() - 1);
 }
 
-void SlideshowController::pause() {
-
-}
-
-void SlideshowController::play() {
-
-}
 
 void SlideshowController::addImage(const std::string &image) {
     imageList->addImage(image);

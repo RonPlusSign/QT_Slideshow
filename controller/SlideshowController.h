@@ -14,10 +14,7 @@ public:
 
     void nextImage();
     void previousImage();
-    void pause();
-    void play();
-
-    void addImage(const std::string& imagePath);
+    void addImage(const std::string &imagePath);
     void clearImageList();
 private:
     ImageList *imageList;
