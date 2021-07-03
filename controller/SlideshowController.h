@@ -10,11 +10,31 @@
 
 class SlideshowController {
 public:
+    /**
+     * Parametrized constructor
+     * @param imageList pointer to the ImageList model
+     */
     explicit SlideshowController(ImageList *imageList);
 
+    /**
+     * Updates the model to go to the next image
+     */
     void nextImage();
+
+    /**
+     * Updates the model to go to the previous image
+     */
     void previousImage();
+
+    /**
+     * Adds an image to the model
+     * @param imagePath (string) path to the image
+     */
     void addImage(const std::string &imagePath);
+
+    /**
+     * Removes all elements from the model
+     */
     void clearImageList();
 private:
     ImageList *imageList;

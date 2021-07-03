@@ -14,14 +14,32 @@ class ChooseFilesDialog : public QDialog {
 Q_OBJECT
 
 public:
+    /**
+     * Parametrized constructor
+     * @param imageList model needed by the Slideshow window
+     * @param controller Slideshow controller
+     * @param parent QWidget parent widget
+     */
     explicit ChooseFilesDialog(ImageList *imageList, SlideshowController *controller, QWidget *parent = nullptr);
     ~ChooseFilesDialog() override;
 
 private slots:
+    /**
+     * "Choose files" button action
+     */
     void on_chooseFilesBtn_clicked();
+
+    /**
+     * "Confirm" button action
+     */
     void on_confirmBtn_clicked();
 
 private:
+
+    /**
+     * Default QDialog constructor
+     * @param parent QWidget parent widget
+     */
     explicit ChooseFilesDialog(QWidget *parent = nullptr);
 
     Ui::ChooseFilesDialog *ui;

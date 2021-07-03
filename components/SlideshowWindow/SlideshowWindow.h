@@ -15,17 +15,37 @@ class SlideshowWindow : public QMainWindow, public Observer {
 Q_OBJECT
 
 public:
+    /**
+     * Parametrized constructor
+     * @param controller pointer to the slideshow controller
+     * @param imageList pointer to the model object
+     * @param filesDialog ChooseFilesDialog pointer (needed to restart the slideshow)
+     * @param parent (QWidget) parent widget
+     */
     SlideshowWindow(SlideshowController *controller, ImageList *imageList, QDialog *filesDialog, QWidget *parent = nullptr);
+
     ~SlideshowWindow() override;
 
+    /**
+     * Gets the updated data from the model and updates the view
+     */
     void update() override;
 
 private slots:
 
+    /**
+     * "Next" button action
+     */
     void on_next_clicked();
 
+    /**
+     * "Previous" button action
+     */
     void on_previous_clicked();
 
+    /**
+     * "Play/Pause" button action
+     */
     void on_togglePlayPause_clicked();
 
 private:
