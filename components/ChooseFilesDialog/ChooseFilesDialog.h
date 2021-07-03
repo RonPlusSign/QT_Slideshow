@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <model/ImageList.h>
 #include <controller/SlideshowController.h>
-#include <MainWindow.h>
+#include <components/SlideshowWindow/SlideshowWindow.h>
 
 namespace Ui {
     class ChooseFilesDialog;
@@ -27,7 +27,7 @@ private:
     Ui::ChooseFilesDialog *ui;
     ImageList *imageList;
     SlideshowController *controller;
-    MainWindow *mainWindow;
+    SlideshowWindow *mainWindow;
 };
 
 #endif // CHOOSEFILESDIALOG_H

@@ -1,12 +1,12 @@
 #include <QPixmap>
 #include <QImageReader>
 #include <iostream>
-#include "MainWindow.h"
-#include "./ui_MainWindow.h"
+#include "SlideshowWindow.h"
+#include "./ui_SlideshowWindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
+SlideshowWindow::SlideshowWindow(QWidget *parent)
         : QMainWindow(parent),
-          ui(new Ui::MainWindow),
+          ui(new Ui::SlideshowWindow),
           imageList(nullptr),
           controller(nullptr),
           filesDialog(nullptr),
@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle("Image Slideshow");
 }
 
-MainWindow::MainWindow(SlideshowController *controller, ImageList *imageList, QDialog *filesDialog, QWidget *parent) : MainWindow(parent) {
+SlideshowWindow::SlideshowWindow(SlideshowController *controller, ImageList *imageList, QDialog *filesDialog, QWidget *parent) : SlideshowWindow(parent) {
     this->controller = controller;
     this->imageList = imageList;
     this->filesDialog = filesDialog;
@@ -30,12 +30,12 @@ MainWindow::MainWindow(SlideshowController *controller, ImageList *imageList, QD
     startSlideshowTimer();
 }
 
-MainWindow::~MainWindow() {
+SlideshowWindow::~SlideshowWindow() {
     delete ui;
     this->imageList->unsubscribe(this);
 }
 
-void MainWindow::on_togglePlayPause_clicked() {
+void SlideshowWindow::on_togglePlayPause_clicked() {
     if (isRunning) {
         ui->togglePlayPause->setText("►");
         delete timer;
@@ -47,47 +47,47 @@ void MainWindow::on_togglePlayPause_clicked() {
     isRunning = !isRunning;
 }
 
-void MainWindow::on_next_clicked() {
+void SlideshowWindow::on_next_clicked() {
     controller->nextImage();
 
     if (isRunning)
         startSlideshowTimer();
 }
 
-void MainWindow::on_previous_clicked() {
+void SlideshowWindow::on_previous_clicked() {
     controller->previousImage();
 
     if (isRunning)
         startSlideshowTimer();
 }
 
-void MainWindow::update() {
+void SlideshowWindow::update() {
     renderImage();
     updateProgressBar();
 }
 
-void MainWindow::renderImage() {
+void SlideshowWindow::renderImage() {
     QPixmap img(QString::fromStdString(this->imageList->getImagePath(this->imageList->getDisplayedImagePosition())));
     ui->image->setPixmap(img.scaled(ui->image->size(), Qt::KeepAspectRatio));
 }
 
-void MainWindow::updateProgressBar() {
+void SlideshowWindow::updateProgressBar() {
     ui->progressBar->setValue(imageList->getDisplayedImagePosition() + 1);
 }
 
-void MainWindow::startSlideshowTimer() {
+void SlideshowWindow::startSlideshowTimer() {
     if (timer != nullptr) {
         delete timer;
         timer = nullptr;
     }
 
     timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &MainWindow::on_next_clicked);
+    connect(timer, &QTimer::timeout, this, &SlideshowWindow::on_next_clicked);
     timer->start(3000);
     timer->setSingleShot(true);
 }
 
-void MainWindow::showEvent(QShowEvent *event) {
+void SlideshowWindow::showEvent(QShowEvent *event) {
     QWidget::showEvent(event);
     renderImage();
 }

@@ -18,8 +18,8 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 set(PROJECT_SOURCES
         main.cpp
-        MainWindow.cpp MainWindow.h MainWindow.ui
-        components/ChooseFilesDialog.h components/ChooseFilesDialog.cpp components/ChooseFilesDialog.ui
+        components/SlideshowWindow/SlideshowWindow.cpp components/SlideshowWindow/SlideshowWindow.h components/SlideshowWindow/SlideshowWindow.ui
+        components/ChooseFilesDialog/ChooseFilesDialog.h components/ChooseFilesDialog/ChooseFilesDialog.cpp components/ChooseFilesDialog/ChooseFilesDialog.ui
         controller/SlideshowController.cpp controller/SlideshowController.h
         model/ImageList.cpp model/ImageList.h
         interfaces/Subject.h interfaces/Observer.h

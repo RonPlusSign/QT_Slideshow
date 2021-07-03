@@ -2,7 +2,7 @@
 #include <QApplication>
 #include <model/ImageList.h>
 #include <controller/SlideshowController.h>
-#include <components/ChooseFilesDialog.h>
+#include <components/ChooseFilesDialog/ChooseFilesDialog.h>
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);

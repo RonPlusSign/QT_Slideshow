@@ -47,7 +47,7 @@ void ChooseFilesDialog::on_chooseFilesBtn_clicked() {
 
 void ChooseFilesDialog::on_confirmBtn_clicked() {
     if (mainWindow == nullptr)
-        mainWindow = new MainWindow(controller, imageList, this);
+        mainWindow = new SlideshowWindow(controller, imageList, this);
 
     mainWindow->show();
     this->setVisible(false);

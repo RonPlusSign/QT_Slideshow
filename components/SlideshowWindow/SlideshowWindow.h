@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef SLIDESHOWWINDOW_H
+#define SLIDESHOWWINDOW_H
 
 #include <QMainWindow>
 #include <QTimer>
@@ -8,15 +8,15 @@
 #include <model/ImageList.h>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui { class SlideshowWindow; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow, public Observer {
+class SlideshowWindow : public QMainWindow, public Observer {
 Q_OBJECT
 
 public:
-    MainWindow(SlideshowController *controller, ImageList *imageList, QDialog *filesDialog, QWidget *parent = nullptr);
-    ~MainWindow() override;
+    SlideshowWindow(SlideshowController *controller, ImageList *imageList, QDialog *filesDialog, QWidget *parent = nullptr);
+    ~SlideshowWindow() override;
 
     void update() override;
 
@@ -33,7 +33,7 @@ private:
      * Default QT Constructor
      * @param parent of the current Widget
      */
-    explicit MainWindow(QWidget *parent);
+    explicit SlideshowWindow(QWidget *parent);
 
     /**
      * Load & display the currently selected image
@@ -56,7 +56,7 @@ private:
      */
     void showEvent(QShowEvent *event) override;
 
-    Ui::MainWindow *ui;
+    Ui::SlideshowWindow *ui;
     SlideshowController *controller;
     ImageList *imageList;
     QDialog *filesDialog;
@@ -64,4 +64,4 @@ private:
     bool isRunning;
 };
 
-#endif // MAINWINDOW_H
+#endif // SLIDESHOWWINDOW_H
