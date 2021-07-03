@@ -15,3 +15,7 @@ Visualizzatore di immagini che data "playlist" crea uno slideshow temporizzato. 
 ### Schermata per la scelta delle immagini
 
 ![Choose Files Dialog](./choose-files-dialog-screenshot.png)
+
+## Diagramma UML delle classi
+
+![UML Diagram](./uml-diagram.png)
