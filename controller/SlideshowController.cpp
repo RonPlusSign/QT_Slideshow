@@ -4,7 +4,8 @@
 
 #include "SlideshowController.h"
 
-SlideshowController::SlideshowController(ImageList *imageList) : imageList(imageList) {}
+
+SlideshowController::SlideshowController(std::shared_ptr<ImageList> imageList) : imageList(std::move(imageList)) {}
 
 void SlideshowController::nextImage() {
     // If I'm at the end, restart from the first image

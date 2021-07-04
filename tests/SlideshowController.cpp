@@ -3,22 +3,23 @@
 //
 
 #include <gtest/gtest.h>
+
+#include <memory>
 #include "../model/ImageList.h"
 #include "../controller/SlideshowController.h"
 
 class SlideshowControllerTest : public testing::Test {
 protected:
     std::unique_ptr<SlideshowController> controller;
-    ImageList *imageList;
+    std::shared_ptr<ImageList> imageList;
 
     void SetUp() override {
-        imageList = new ImageList({"a.png", "b.gif", "c.jpg", "d.jpeg"});
+        std::vector<std::string> images = {"a.png", "b.gif", "c.jpg", "d.jpeg"};
+        imageList = std::make_shared<ImageList>(images);
         controller = std::make_unique<SlideshowController>(imageList);
     }
 
-    void TearDown() override {
-        delete imageList;
-    }
+    void TearDown() override {}
 };
 
 TEST_F(SlideshowControllerTest, AddImage) {

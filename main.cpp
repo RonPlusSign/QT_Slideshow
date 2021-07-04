@@ -7,11 +7,11 @@
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    ImageList model;
-    SlideshowController controller(&model);
+    auto model = std::make_shared<ImageList>();
+    auto controller = std::make_shared<SlideshowController>(model);
 
-    QDialog *chooseFilesDialog = new ChooseFilesDialog(&model, &controller);
-    chooseFilesDialog->show();
+    ChooseFilesDialog chooseFilesDialog(model, controller);
+    chooseFilesDialog.show();
 
     return app.exec();
 }

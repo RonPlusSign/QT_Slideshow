@@ -17,12 +17,12 @@ Q_OBJECT
 public:
     /**
      * Parametrized constructor
-     * @param controller pointer to the slideshow controller
-     * @param imageList pointer to the model object
-     * @param filesDialog ChooseFilesDialog pointer (needed to restart the slideshow)
+     * @param controller shared_ptr to the slideshow controller
+     * @param imageList shared_ptr to the model object
+     * @param filesDialog ChooseFilesDialog unique_ptr (needed to restart the slideshow)
      * @param parent (QWidget) parent widget
      */
-    SlideshowWindow(SlideshowController *controller, ImageList *imageList, QDialog *filesDialog, QWidget *parent = nullptr);
+    SlideshowWindow(const std::shared_ptr<SlideshowController> &controller, const std::shared_ptr<ImageList> &imageList, QDialog *filesDialog, QWidget *parent = nullptr);
 
     ~SlideshowWindow() override;
 
@@ -77,11 +77,11 @@ private:
     void showEvent(QShowEvent *event) override;
 
     Ui::SlideshowWindow *ui;
-    SlideshowController *controller;
-    ImageList *imageList;
-    QDialog *filesDialog;
-    QTimer *timer;
-    bool isRunning;
+    std::shared_ptr<SlideshowController> controller = nullptr;
+    std::shared_ptr<ImageList> imageList = nullptr;
+    QDialog *filesDialog = nullptr;
+    QTimer *timer = nullptr;
+    bool isRunning = true;
 };
 
 #endif // SLIDESHOWWINDOW_H

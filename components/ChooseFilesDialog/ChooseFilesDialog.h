@@ -20,7 +20,7 @@ public:
      * @param controller Slideshow controller
      * @param parent QWidget parent widget
      */
-    explicit ChooseFilesDialog(ImageList *imageList, SlideshowController *controller, QWidget *parent = nullptr);
+    explicit ChooseFilesDialog(std::shared_ptr<ImageList> imageList, std::shared_ptr<SlideshowController> controller, QWidget *parent = nullptr);
     ~ChooseFilesDialog() override;
 
 private slots:
@@ -43,9 +43,9 @@ private:
     explicit ChooseFilesDialog(QWidget *parent = nullptr);
 
     Ui::ChooseFilesDialog *ui;
-    ImageList *imageList;
-    SlideshowController *controller;
-    SlideshowWindow *mainWindow;
+    std::shared_ptr<ImageList> imageList;
+    std::shared_ptr<SlideshowController> controller;
+    SlideshowWindow *mainWindow = nullptr;
 };
 
 #endif // CHOOSEFILESDIALOG_H

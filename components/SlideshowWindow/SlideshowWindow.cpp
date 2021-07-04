@@ -4,19 +4,13 @@
 #include "SlideshowWindow.h"
 #include "./ui_SlideshowWindow.h"
 
-SlideshowWindow::SlideshowWindow(QWidget *parent)
-        : QMainWindow(parent),
-          ui(new Ui::SlideshowWindow),
-          imageList(nullptr),
-          controller(nullptr),
-          filesDialog(nullptr),
-          timer(nullptr),
-          isRunning(true) {
+SlideshowWindow::SlideshowWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::SlideshowWindow) {
     ui->setupUi(this);
     setWindowTitle("Image Slideshow");
 }
 
-SlideshowWindow::SlideshowWindow(SlideshowController *controller, ImageList *imageList, QDialog *filesDialog, QWidget *parent) : SlideshowWindow(parent) {
+SlideshowWindow::SlideshowWindow(const std::shared_ptr<SlideshowController> &controller, const std::shared_ptr<ImageList> &imageList, QDialog *filesDialog, QWidget *parent)
+        : SlideshowWindow(parent) {
     this->controller = controller;
     this->imageList = imageList;
     this->filesDialog = filesDialog;

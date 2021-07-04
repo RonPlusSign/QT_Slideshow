@@ -12,9 +12,9 @@ class SlideshowController {
 public:
     /**
      * Parametrized constructor
-     * @param imageList pointer to the ImageList model
+     * @param imageList shared_ptr to the ImageList model
      */
-    explicit SlideshowController(ImageList *imageList);
+    explicit SlideshowController(std::shared_ptr<ImageList> imageList);
 
     /**
      * Updates the model to go to the next image
@@ -38,7 +38,7 @@ public:
     void clearImageList();
 
 private:
-    ImageList *imageList;
+    std::shared_ptr<ImageList> imageList;
 };
 
 

@@ -80,9 +80,9 @@ public:
 
     /**
      * Sets the currently displayed image position
-     * @param displayedImagePosition (int) Image position
+     * @param imagePosition (int) Image position
      */
-    void setDisplayedImagePosition(int displayedImagePosition);
+    void setDisplayedImagePosition(int imagePosition);
 
 private:
     std::vector<std::string> imagesPath;

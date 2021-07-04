@@ -11,13 +11,13 @@ ChooseFilesDialog::ChooseFilesDialog(QWidget *parent) : QDialog(parent), ui(new 
     ui->confirmBtn->setEnabled(false);
 }
 
-ChooseFilesDialog::ChooseFilesDialog(ImageList *imageList, SlideshowController *controller, QWidget *parent) : ChooseFilesDialog(parent) {
+ChooseFilesDialog::ChooseFilesDialog(std::shared_ptr<ImageList> imageList, std::shared_ptr<SlideshowController> controller, QWidget *parent)
+        : ChooseFilesDialog(parent) {
     if (imageList == nullptr)
         throw std::invalid_argument("Invalid ImageList pointer received (ChooseFilesDialog)");
-    this->imageList = imageList;
-    mainWindow = nullptr;
+    this->imageList = std::move(imageList);
 
-    this->controller = controller;
+    this->controller = std::move(controller);
 }
 
 ChooseFilesDialog::~ChooseFilesDialog() {

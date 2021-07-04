@@ -69,10 +69,10 @@ int ImageList::getDisplayedImagePosition() const {
     return displayedImagePosition;
 }
 
-void ImageList::setDisplayedImagePosition(int displayedImagePosition) {
-    if (displayedImagePosition < 0 || displayedImagePosition >= imagesPath.size())
+void ImageList::setDisplayedImagePosition(int imagePosition) {
+    if (imagePosition < 0 || imagePosition >= imagesPath.size())
         throw std::invalid_argument("Invalid displayed image position");
 
-    this->displayedImagePosition = displayedImagePosition;
+    this->displayedImagePosition = imagePosition;
     notify();
 }

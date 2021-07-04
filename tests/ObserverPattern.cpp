@@ -19,21 +19,19 @@ public:
     }
 
 protected:
-    ImageList *imageList;
+    std::shared_ptr<ImageList> imageList;
     std::unique_ptr<SlideshowController> controller;
-    bool updated;
+    bool updated = false;
 
     void SetUp() override {
-        imageList = new ImageList();
+        imageList = std::make_shared<ImageList>();
         controller = std::make_unique<SlideshowController>(imageList);
 
         imageList->subscribe(this);
-        updated = false;
     }
 
     void TearDown() override {
         imageList->unsubscribe(this);
-        delete imageList;
     }
 };
 
