@@ -6,7 +6,7 @@
 #define QT_SLIDESHOW_SLIDESHOWCONTROLLER_H
 
 #include <memory>
-#include <model/ImageList.h>
+#include "../model/ImageList.h"
 
 class SlideshowController {
 public:
@@ -36,6 +36,7 @@ public:
      * Removes all elements from the model
      */
     void clearImageList();
+
 private:
     ImageList *imageList;
 };

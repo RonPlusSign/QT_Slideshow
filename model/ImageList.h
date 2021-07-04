@@ -7,7 +7,7 @@
 
 #include <string>
 #include <vector>
-#include <interfaces/Subject.h>
+#include "../interfaces/Subject.h"
 
 /**
  * Class that handles a list of image paths
