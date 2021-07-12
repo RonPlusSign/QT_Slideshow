@@ -38,14 +38,14 @@ public:
      * @return (string) The image path
      * @throws out_of_range if the position is invalid
      */
-    std::string getImagePath(int position);
+    std::string getImagePath(int position) const;
 
 
     /**
      * Gets the number of imagesPath inside the list
      * @return (int) Number of imagesPath inside the list
      */
-    int getImagesNumber();
+    int getImagesNumber() const;
 
 
     /**
@@ -65,7 +65,7 @@ public:
     /**
      * Notify all Observers
      */
-    void notify() override;
+    void notify() const override;
 
     /**
      * Removes all the images inside the list

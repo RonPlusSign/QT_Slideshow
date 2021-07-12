@@ -21,14 +21,14 @@ ImageList::ImageList(const std::vector<std::string> &filePaths) {
 ImageList::ImageList(const ImageList &other) : ImageList(other.imagesPath) {}
 
 
-std::string ImageList::getImagePath(int position) {
+std::string ImageList::getImagePath(int position) const {
     if (position < 0 || position >= imagesPath.size())
         throw std::out_of_range("Invalid image position.");
     return imagesPath[position];
 }
 
 
-int ImageList::getImagesNumber() {
+int ImageList::getImagesNumber() const {
     return imagesPath.size();
 }
 
@@ -55,7 +55,7 @@ bool ImageList::isValidImagePath(const std::string &path) {
     return false;
 }
 
-void ImageList::notify() {
+void ImageList::notify() const {
     for (auto observer: observers)
         observer->update();
 }

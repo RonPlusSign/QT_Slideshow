@@ -60,7 +60,7 @@ void SlideshowWindow::update() {
     updateProgressBar();
 }
 
-void SlideshowWindow::renderImage() {
+void SlideshowWindow::renderImage() const {
     QPixmap img(QString::fromStdString(this->imageList->getImagePath(this->imageList->getDisplayedImagePosition())));
     ui->image->setPixmap(img.scaled(ui->image->size(), Qt::KeepAspectRatio));
 }

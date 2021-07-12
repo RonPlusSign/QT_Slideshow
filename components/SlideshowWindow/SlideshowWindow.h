@@ -58,7 +58,7 @@ private:
     /**
      * Load & display the currently selected image
      */
-    void renderImage();
+    void renderImage() const;
 
     /**
      * Update the progress bar to display the correct level

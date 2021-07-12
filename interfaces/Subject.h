@@ -10,15 +10,15 @@
 
 class Subject {
 public:
-    void subscribe(Observer *o) {
+    virtual void subscribe(Observer *o) {
         observers.push_back(o);
     }
 
-    void unsubscribe(Observer *o) {
+    virtual void unsubscribe(Observer *o) {
         observers.push_back(o);
     }
 
-    virtual void notify() = 0;
+    virtual void notify() const = 0;
 
     virtual ~Subject() = default;
 
