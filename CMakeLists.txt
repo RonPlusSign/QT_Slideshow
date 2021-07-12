@@ -23,7 +23,7 @@ set(PROJECT_SOURCES
         controller/SlideshowController.cpp controller/SlideshowController.h
         model/ImageList.cpp model/ImageList.h
         interfaces/Subject.h interfaces/Observer.h
-        )
+        utils/utils.cpp utils/utils.h)
 
 
 add_executable(QT_Slideshow main.cpp)

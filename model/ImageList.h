@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include "../interfaces/Subject.h"
+#include "../utils/utils.h"
 
 /**
  * Class that handles a list of image paths
@@ -89,17 +90,6 @@ private:
     int displayedImagePosition{0};
 
     static const std::vector<std::string> SUPPORTED_EXTENSIONS;
-
-    /**
-     * Check if the path ends with a specific extension
-     * @param path (string) path to check
-     * @param extension (string) extension to look for
-     * @return (bool) True if the path ends with the specific extension, false otherwise
-     */
-    static bool endsWith(const std::string &path, const std::string &extension) {
-        return path.size() >= extension.size() && 0 == path.compare(path.size() - extension.size(), extension.size(), extension);
-    }
-
 };
 
 
